@@ -1,0 +1,32 @@
+---
+title: "Report on US Gun Murders"
+author: "SheeneeLui"
+date: "2 December 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction
+
+```{r loading-libs, message=FALSE}
+library(tidyverse)
+```
+  
+```{r}
+load("rda/murders.rda")
+```
+
+## Murder rate by state 
+
+```{r murder-rate-by-state, echo=FALSE}
+murders %>% mutate(abb = reorder(abb, rate)) %>%
+  ggplot(aes(abb, rate)) +
+  geom_bar(width = 0.5, stat = "identity", color = "black") +
+  coord_flip()
+```
